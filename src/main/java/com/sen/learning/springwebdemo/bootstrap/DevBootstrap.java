@@ -41,7 +41,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 		Publisher mac = new Publisher("Mac Row Hill", "New York, USA");
 		publisherRepository.save(mac);
 
-		Author sen = new Author("Senthil", "Natha");
+		Author sen = new Author("Senthil", "Nathan");
 		Book wb = new Book("How to build wealth", "12345", mac);
 		sen.getBooks().add(wb);
 		wb.getAuthors().add(sen);
