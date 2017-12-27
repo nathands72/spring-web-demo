@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * @author natha
@@ -23,7 +24,10 @@ public class Book {
 	private Long id;
 	private String title;
 	private String isbn;
-	private String publisher;
+
+	@ManyToOne
+	// @JoinColumn(name = "publisher_id")
+	private Publisher publisher;
 
 	@ManyToMany
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -38,9 +42,18 @@ public class Book {
 	/**
 	 * @param title
 	 * @param isbn
+	 */
+	public Book(String title, String isbn) {
+		this.title = title;
+		this.isbn = isbn;
+	}
+
+	/**
+	 * @param title
+	 * @param isbn
 	 * @param publisher
 	 */
-	public Book(String title, String isbn, String publisher) {
+	public Book(String title, String isbn, Publisher publisher) {
 		this.title = title;
 		this.isbn = isbn;
 		this.publisher = publisher;
@@ -52,7 +65,7 @@ public class Book {
 	 * @param publisher
 	 * @param authors
 	 */
-	public Book(String title, String isbn, String publisher, Set<Author> authors) {
+	public Book(String title, String isbn, Publisher publisher, Set<Author> authors) {
 		this.title = title;
 		this.isbn = isbn;
 		this.publisher = publisher;
@@ -91,7 +104,7 @@ public class Book {
 	/**
 	 * @return the publisher
 	 */
-	public String getPublisher() {
+	public Publisher getPublisher() {
 		return publisher;
 	}
 
@@ -122,7 +135,7 @@ public class Book {
 	 * @param publisher
 	 *            the publisher to set
 	 */
-	public void setPublisher(String publisher) {
+	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
 	}
 
